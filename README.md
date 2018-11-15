@@ -1,4 +1,4 @@
-# ExoInvento
+# Ticketish
 
 
 Don't forget to add `appsettings.Development.json` with your connection string next to the `appsettings.json` file
