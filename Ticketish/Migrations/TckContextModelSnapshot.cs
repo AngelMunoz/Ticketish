@@ -103,6 +103,35 @@ namespace Ticketish.Migrations
                     b.ToTable("tck_products");
                 });
 
+            modelBuilder.Entity("Ticketish.Models.Role", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100);
+
+                    b.Property<long>("LastUpdatedBy");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<long?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tck_roles");
+                });
+
             modelBuilder.Entity("Ticketish.Models.Ticket", b =>
                 {
                     b.Property<long>("Id")
@@ -190,6 +219,13 @@ namespace Ticketish.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Ticketish.Models.Role", b =>
+                {
+                    b.HasOne("Ticketish.Models.User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Ticketish.Models.Ticket", b =>

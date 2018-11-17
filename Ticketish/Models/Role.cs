@@ -1,32 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ticketish.Models
 {
-  [Table("tck_users")]
-  public class User : ITrackable
+  [Table("tck_roles")]
+  public class Role : ITrackable
   {
     [Key]
     public long Id { get; set; }
 
     [Required]
-    [EmailAddress]
-    public string Email { get; set; }
-
-    [Required]
-    public string Password { get; set; }
-
-    [Required]
-    [StringLength(80, MinimumLength = 4)]
+    [MaxLength(40)]
     public string Name { get; set; }
 
-    [Required]
-    [StringLength(80, MinimumLength = 4)]
-    public string LastName { get; set; }
-
-    public List<Role> Roles { get; set; }
+    [MaxLength(100)]
+    public string Description { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime CreatedAt { get; set; }
