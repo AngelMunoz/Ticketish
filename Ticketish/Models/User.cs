@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Ticketish.Enums;
 
 namespace Ticketish.Models
 {
@@ -25,6 +26,10 @@ namespace Ticketish.Models
     [Required]
     [StringLength(80, MinimumLength = 4)]
     public string LastName { get; set; }
+
+    [Required]
+    [EnumDataType(typeof(UserType))]
+    public UserType Type { get; set; }
 
     public List<Role> Roles { get; set; }
 
