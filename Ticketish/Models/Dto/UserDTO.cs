@@ -1,4 +1,5 @@
 ﻿using System;
+using Ticketish.Enums;
 
 namespace Ticketish.Models.Dto
 {
@@ -9,5 +10,6 @@ namespace Ticketish.Models.Dto
     public string Name { get; set; }
     public string LastName { get; set; }
     public DateTime CreatedAt { get; set; }
+    public UserType Type { get; set; }
   }
 }

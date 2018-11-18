@@ -32,9 +32,9 @@ namespace Ticketish.Services
       throw new NotImplementedException();
     }
 
-    public Task<List<User>> FindAsync()
+    public async Task<List<User>> FindAsync()
     {
-      throw new NotImplementedException();
+      return await _context.Users.ToListAsync();
     }
 
     public async Task<User> FindOneAsync(long id)

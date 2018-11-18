@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Ticketish.Models;
 using Ticketish.Models.Dto;
@@ -16,10 +19,12 @@ namespace Ticketish.Controllers
   public class UsersController : ControllerBase
   {
     private readonly UserService _service;
+    private readonly IConfiguration _config;
 
-    public UsersController(UserService service)
+    public UsersController(UserService service, IConfiguration config)
     {
       _service = service;
+      _config = config;
     }
 
     // GET: api/Users
@@ -69,6 +74,33 @@ namespace Ticketish.Controllers
       }
 
       await _service.UpdateAsync(user.Id, user);
+
+      return NoContent();
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> AddUser([FromBody] User user)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      var claim = HttpContext.User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+      var sender = await _service.FindOneAsync(long.Parse(claim.Value));
+      var role = new Role
+      {
+        Name = "ROOT"
+      };
+      if (sender.Roles != null && sender.Roles.Contains(role))
+      {
+        Console.WriteLine("Yay!");
+      }
+      else
+      {
+        Console.WriteLine("No Yay Yay!");
+      }
+
+      await _service.CreateAsync(user);
 
       return NoContent();
     }
