@@ -31,7 +31,7 @@ namespace Ticketish.Models
     [EnumDataType(typeof(UserType))]
     public UserType Type { get; set; }
 
-    public List<Role> Roles { get; set; }
+    public List<UserRole> UserRoles { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime CreatedAt { get; set; }

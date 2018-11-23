@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ticketish.Models;
 
 namespace Ticketish.Migrations
 {
   [DbContext(typeof(TckContext))]
-  partial class TckContextModelSnapshot : ModelSnapshot
+  [Migration("20181123074316_ChangeRoleRelations")]
+  partial class ChangeRoleRelations
   {
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
 #pragma warning disable 612, 618
       modelBuilder

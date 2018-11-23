@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,8 @@ namespace Ticketish.Models
 
     [MaxLength(100)]
     public string Description { get; set; }
+
+    public List<UserRole> UserRoles { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime CreatedAt { get; set; }

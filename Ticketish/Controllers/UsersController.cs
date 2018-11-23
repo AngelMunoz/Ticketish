@@ -87,18 +87,7 @@ namespace Ticketish.Controllers
       }
       var claim = HttpContext.User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
       var sender = await _service.FindOneAsync(long.Parse(claim.Value));
-      var role = new Role
-      {
-        Name = "ROOT"
-      };
-      if (sender.Roles != null && sender.Roles.Contains(role))
-      {
-        Console.WriteLine("Yay!");
-      }
-      else
-      {
-        Console.WriteLine("No Yay Yay!");
-      }
+      // TODO: Add the Role Validation stuff
 
       await _service.CreateAsync(user);
 
